@@ -117,6 +117,64 @@ package wiz.encrypt {
 		}
 		
 		/**
+		 * decryptString() のテスト
+		 * 
+		 * @type 異常系。
+		 * @comment 文字コードがnull。
+		 */
+		[Test]
+		public function testDecryptString_Error_CharsetIsNull():void {
+			const target:String = createString(SOURCE_STRING_UTF8, Charset.UTF8);
+			const source:ByteArray = encryptString(target, Charset.UTF8);
+			const charset:String = null;
+			
+			// UTF-8として扱う
+			const encryptor:Encryptor = createEncryptor();
+			const result:String = encryptor.decryptString(source, Charset.UTF8);
+			
+			Assert.assertEquals(target, result);
+		}
+		
+		/**
+		 * decryptString() のテスト
+		 * 
+		 * @type 異常系。
+		 * @comment 空の文字コード。
+		 */
+		[Test]
+		public function testDecryptString_Error_CharsetIsEmpty():void {
+			const target:String = createString(SOURCE_STRING_UTF8, Charset.UTF8);
+			const source:ByteArray = encryptString(target, Charset.UTF8);
+			const charset:String = "";
+			
+			// UTF-8として扱う
+			const encryptor:Encryptor = createEncryptor();
+			const result:String = encryptor.decryptString(source, Charset.UTF8);
+			
+			Assert.assertEquals(target, result);
+		}
+		
+		/**
+		 * decryptString() のテスト
+		 * 
+		 * @type 異常系。
+		 * @comment サポート対象外の文字コード。
+		 */
+		[Test]
+		public function testDecryptString_Error_UnsuppoertedCharset():void {
+			const target:String = createString(SOURCE_STRING_UTF8, Charset.UTF8);
+			const source:ByteArray = encryptString(target, Charset.UTF8);
+			const charset:String = "UTF-16";
+			
+			try {
+				const encryptor:Encryptor = createEncryptor();
+				encryptor.decryptString(source,　charset);
+				Assert.fail("Expect: IllegalOperationError");
+			}
+			catch (e:IllegalOperationError) {}
+		}
+		
+		/**
 		 * encryptString() のテスト
 		 * 
 		 * @type 正常系。
@@ -233,12 +291,12 @@ package wiz.encrypt {
 			const source:String = createString(SOURCE_STRING_UTF8, Charset.UTF8);
 			const charset:String = null;
 			
-			try {
-				const encryptor:Encryptor = createEncryptor();
-				encryptor.encryptString(source,　charset);
-				Assert.fail("Expect: ArgumentError");
-			}
-			catch (e:ArgumentError) {}
+			// UTF-8として扱う
+			const encryptor:Encryptor = createEncryptor();
+			const result:ByteArray = encryptor.encryptString(source, charset);
+			
+			Assert.assertNotNull(result);
+			Assert.assertEquals(source, decryptString(result, charset));
 		}
 		
 		/**
@@ -252,12 +310,12 @@ package wiz.encrypt {
 			const source:String = createString(SOURCE_STRING_UTF8, Charset.UTF8);
 			const charset:String = "";
 			
-			try {
-				const encryptor:Encryptor = createEncryptor();
-				encryptor.encryptString(source,　charset);
-				Assert.fail("Expect: ArgumentError");
-			}
-			catch (e:ArgumentError) {}
+			// UTF-8として扱う
+			const encryptor:Encryptor = createEncryptor();
+			const result:ByteArray = encryptor.encryptString(source, charset);
+			
+			Assert.assertNotNull(result);
+			Assert.assertEquals(source, decryptString(result, charset));
 		}
 		
 		/**

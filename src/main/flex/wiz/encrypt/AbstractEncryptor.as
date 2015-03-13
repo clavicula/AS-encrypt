@@ -31,12 +31,12 @@ package wiz.encrypt {
 		/**
 		 * 文字列を復号化
 		 */
-		public function decryptString(source:ByteArray, charset:String="UTF-8"):String {
+		public function decryptString(source:ByteArray, charset:String = null):String {
 			if (source == null) {
 				return "";
 			}
 			if (!charset) {
-				throw new ArgumentError("Charset is null.");
+				return decryptString(source, Charset.UTF8);
 			}
 			if (Charset.values().indexOf(charset) == -1) {
 				throw new IllegalOperationError("Unsupported charset : " + charset);
@@ -56,12 +56,12 @@ package wiz.encrypt {
 		/**
 		 * 文字列を暗号化
 		 */
-		public function encryptString(source:String, charset:String="UTF-8"):ByteArray {
+		public function encryptString(source:String, charset:String = null):ByteArray {
 			if (!source) {
 				return new ByteArray();
 			}
 			if (!charset) {
-				throw new ArgumentError("Charset is null.");
+				return encryptString(source, Charset.UTF8);
 			}
 			if (Charset.values().indexOf(charset) == -1) {
 				throw new IllegalOperationError("Unsupported charset : " + charset);

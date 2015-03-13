@@ -24,7 +24,7 @@ package wiz.encrypt {
 		 * @param charset 文字コード。
 		 * @return 複号化結果。
 		 */
-		function decryptString(source:ByteArray, charset:String = "UTF-8"):String;
+		function decryptString(source:ByteArray, charset:String = null):String;
 		
 		/**
 		 * バイナリデータを暗号化
@@ -41,7 +41,7 @@ package wiz.encrypt {
 		 * @param charset 文字コード。
 		 * @return 暗号化結果。
 		 */
-		function encryptString(source:String, charset:String = "UTF-8"):ByteArray;
+		function encryptString(source:String, charset:String = null):ByteArray;
 		
 	}
 	
