@@ -8,7 +8,7 @@ package wiz.encrypt {
 	/**
 	 * XOR演算による暗号化
 	 */
-	public class XOREncryptor implements Encryptor {
+	public class XOREncryptor extends AbstractEncryptor {
 		
 		/**
 		 * コンストラクタ
@@ -21,59 +21,21 @@ package wiz.encrypt {
 		/**
 		 * バイナリデータを複号化
 		 */
-		public function decryptBinary(source:ByteArray):ByteArray {
+		public override function decryptBinary(source:ByteArray):ByteArray {
 			if (!source) {
 				return new ByteArray();
 			}
 			return crypt(source);
-		}
-		
-		/**
-		 * 文字列を複号化
-		 */
-		public function decryptString(source:ByteArray, charset:String = "UTF-8"):String {
-			if (source == null) {
-				return "";
-			}
-			if (!charset) {
-				throw new ArgumentError("Charset is null.");
-			}
-			if (Charset.values().indexOf(charset) == -1) {
-				throw new IllegalOperationError("Unsupported charset : " + charset);
-			}
-			
-			const buf:ByteArray = decryptBinary(source);
-			return buf.readMultiByte(buf.length, charset);
 		}
 		
 		/**
 		 * バイナリデータを暗号化
 		 */
-		public function encryptBinary(source:ByteArray):ByteArray {
+		public override function encryptBinary(source:ByteArray):ByteArray {
 			if (!source) {
 				return new ByteArray();
 			}
 			return crypt(source);
-		}
-		
-		/**
-		 * 文字列を暗号化
-		 */
-		public function encryptString(source:String, charset:String = "UTF-8"):ByteArray {
-			if (!source) {
-				return new ByteArray();
-			}
-			if (!charset) {
-				throw new ArgumentError("Charset is null.");
-			}
-			if (Charset.values().indexOf(charset) == -1) {
-				throw new IllegalOperationError("Unsupported charset : " + charset);
-			}
-			
-			const sourceBinaryData:ByteArray = new ByteArray();
-			sourceBinaryData.writeMultiByte(source, charset);
-			sourceBinaryData.position = 0;
-			return encryptBinary(sourceBinaryData);
 		}
 		
 		

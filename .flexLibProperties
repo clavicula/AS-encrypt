@@ -4,6 +4,9 @@
     <classEntry path="wiz.encrypt.Charset"/>
     <classEntry path="wiz.encrypt.Encryptor"/>
     <classEntry path="wiz.encrypt.XOREncryptor"/>
+    <classEntry path="wiz.encrypt.AbstractEncryptor"/>
+    <classEntry path="wiz.encrypt.AbstractEncryptorTest"/>
+    <classEntry path="wiz.encrypt.AbstractEncryptor_forTest"/>
   </includeClasses>
   <includeResources/>
   <namespaceManifests/>
