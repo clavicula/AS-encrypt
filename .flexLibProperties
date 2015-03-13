@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flexLibProperties includeAllClasses="false" useMultiPlatformConfig="false" version="3">
+  <includeClasses>
+    <classEntry path="wiz.encrypt.Charset"/>
+    <classEntry path="wiz.encrypt.Encryptor"/>
+    <classEntry path="wiz.encrypt.XOREncryptor"/>
+  </includeClasses>
+  <includeResources/>
+  <namespaceManifests/>
+</flexLibProperties>
